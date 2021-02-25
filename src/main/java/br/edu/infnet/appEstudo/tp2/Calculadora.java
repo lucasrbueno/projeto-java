@@ -7,10 +7,10 @@ public class Calculadora {
         System.out.println(operacao(3));
     }
     
-    public static float operacao(int escolha){
-        float n1 = 15;
-        float n2 = 3;
-        float conta = 0;
+    public static double operacao(int escolha){
+        double n1 = 15;
+        double n2 = 3;
+        double conta = 0;
         
         switch (escolha) {
             case 1:
