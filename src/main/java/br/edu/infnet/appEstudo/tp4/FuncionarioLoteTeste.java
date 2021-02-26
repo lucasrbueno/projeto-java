@@ -1,69 +1,97 @@
 package br.edu.infnet.appEstudo.tp4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class FuncionarioLoteTeste {
-     public static final int QUANT = 1;
+     private static String opcao = null; 
+     private static List<Funcionario> funcionario;
     
     public static void main(String[] args) {
-        
-        String opcao = null; 
         Scanner scan = new Scanner(System.in);
         int escolha;
-        int i = 0;
         
-        Funcionario[] funcionario = new Funcionario[QUANT];
+         funcionario = new ArrayList<>();
 
         do {
             escolha = menu();
             
             switch(escolha){
                 case 1:
-                    if(i < QUANT){
-                        Funcionario func = new Funcionario();
+                        Programador programador = new Programador();
 
                         System.out.println("Informe seu nome: ");
-                        func.setNome(scan.next());
+                        programador.setNome(scan.next());
 
                         System.out.println("Informe seu email: ");
-                        func.setEmail(scan.next());
+                        programador.setEmail(scan.next());
 
                         System.out.println("Informe seu salário: ");
-                        func.setSalario(scan.nextFloat());
+                        programador.setSalario(scan.nextFloat());
 
                         System.out.println("Informe sua idade: ");
-                        func.setIdade(scan.nextInt());
+                        programador.setIdade(scan.nextInt());
+                        
+                        System.out.println("Informe a sua linguagem: ");
+                        programador.setLinguagem(scan.next());
+                        
+                        System.out.println("Informe o seu valor adicional: ");
+                        programador.setValorAdicional(scan.nextFloat());
 
-                        func.impressao();
+                        programador.impressao();
 
                         System.out.println("Deseja cadastrar um funcionãrio: (S/N). Resposta: ");
                         opcao = scan.next();
 
-                        funcionario[i] = func;
-
-                        i++;
-                    } else {
-                        System.out.println("Não é possivel cadastrar mais");
-                    }
+                        funcionario.add(programador);
                     break;
                 case 2:
-                    
-                    if(i < 0){
-                        for(int j = 0; j < i ; j++){
-                            System.out.println(funcionario[j]);
+                    AnalistaSistema analista = new AnalistaSistema();
+
+                    System.out.println("Informe seu nome: ");
+                    analista.setNome(scan.next());
+
+                    System.out.println("Informe seu email: ");
+                    analista.setEmail(scan.next());
+
+                    System.out.println("Informe seu salário: ");
+                    analista.setSalario(scan.nextFloat());
+
+                    System.out.println("Informe sua idade: ");
+                    analista.setIdade(scan.nextInt());
+
+                    System.out.println("Informe a sua linguagem: ");
+                    analista.setQtdeSistema(scan.nextInt());
+
+                    System.out.println("Informe o seu valor adicional: ");
+                    analista.setTempoExperiencia(scan.nextInt());
+
+                    analista.impressao();
+
+                    System.out.println("Deseja cadastrar um funcionãrio: (S/N). Resposta: ");
+                    opcao = scan.next();
+
+                    funcionario.add(analista);
+                    break;
+                case 3:
+                    if(funcionario.size() > 0){
+                        for(Funcionario f : funcionario){
+                            String tipo = f instanceof Programador ? "P" : "A";
+
+                            System.out.println(tipo + " " + f);
                         } 
                     } else {
                         System.out.println("Nenhum funcionário cadastrado");
                     }
                 opcao = "S";
                 break;
-                case 3:
+                case 4:
                     System.out.println("Saindo...");
                     opcao = "N";
                     break;
                 default:
-                    System.out.println("Opção inválida, tente novamente");
-                    opcao = "S";
+                    tratarOpcaoInvalida();
                     break;
             }
         } while ("S".equalsIgnoreCase(opcao));
@@ -75,13 +103,19 @@ public class FuncionarioLoteTeste {
         Scanner scan = new Scanner(System.in);
         
         System.out.println("Cadastramento de funcionários: ");
-        System.out.println("1 - Incluir");
-        System.out.println("2 - Exibir todos");
-        System.out.println("3 - Sair");
+        System.out.println("1 - Incluir programadores");
+        System.out.println("2 - Incluir analistas");
+        System.out.println("3 - Exibir todos");
+        System.out.println("4 - Sair");
         System.out.println("Escolha sua opção: ");
         
         int escolha = scan.nextInt();
         
         return escolha;
+    }
+    
+    public static void tratarOpcaoInvalida(){
+        System.out.println("Opção inválida, tente novamente");
+        opcao = "S";
     }
 }

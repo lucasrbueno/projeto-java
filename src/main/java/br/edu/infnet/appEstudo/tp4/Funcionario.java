@@ -1,9 +1,9 @@
 package br.edu.infnet.appEstudo.tp4;
 
-public class Funcionario {
+public abstract class Funcionario {
    private String nome;
    private String email;
-   private float salario;
+   protected float salario;
    private int idade;
 
     public Funcionario() {
@@ -24,8 +24,10 @@ public class Funcionario {
     }
     
     public void impressao(){
-        System.out.println("Funcionário cadastrado com sucesso com os dados: " + this);
+        System.out.println("Funcionário cadastrado com sucesso com os dados: " + this + ":" + this.calcularSalario());
     }
+    
+    public abstract float calcularSalario();
     
    @Override
     public String toString(){
