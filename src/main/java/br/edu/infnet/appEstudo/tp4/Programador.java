@@ -6,7 +6,9 @@ public class Programador extends Funcionario {
     
     @Override
     public float calcularSalario() {
-        return salario + Constantes.VL_JAVA * 1000 + valorAdicional * Constantes.VL_EXPERIENCIA;
+        return this.getSalario() + 
+				valorAdicional + 
+				("java".equalsIgnoreCase(linguagem) ? Constantes.VL_JAVA : 0);
     }
     
     public String getLinguagem() {
